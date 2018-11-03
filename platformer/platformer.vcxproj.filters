@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="gamecore">
+      <UniqueIdentifier>{176d801d-70ce-474a-9faf-6785e1f934d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="images\map.tmx">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\circle.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\collisionObject.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\hitbox.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\line.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\plate.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\point.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\poly.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\rect.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\tiledparser.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\tilesheet.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCore\triangle.cpp">
+      <Filter>gamecore</Filter>
+    </ClCompile>
+    <ClCompile Include="level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameCore\circle.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\collisionObject.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\hitbox.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\line.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\plate.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\point.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\poly.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\rect.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\tiledparser.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\tilesheet.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="GameCore\triangle.h">
+      <Filter>gamecore</Filter>
+    </ClInclude>
+    <ClInclude Include="level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\bg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
