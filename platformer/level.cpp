@@ -37,6 +37,15 @@ level::level(string levelname)
 		else if (currentlayer.head("type").compare("layer")==0) {
 			this->handleplates(currentlayer);
 		}
+		else if (currentlayer.head("type").compare("objectgroup") == 0) {
+			if (currentlayer.head("name").compare("zones") == 0) {
+
+				handlezones(currentlayer);
+			}
+		}
+		else {
+
+		}
 	}
 
 
@@ -68,9 +77,8 @@ void level::handleplates(tmxtag currentlayer)
 	int w = stoi(currentlayer.head("width"));
 	int h = stoi(currentlayer.head("height"));
 	string initdata = currentlayer.get(0).getData();
-	int x = 0;
+	int x = -1;
 	int y = 0;
-	cout << initdata << endl;
 	if (currentlayer.head("name").find("bg") != string::npos) {
 		for (int end = 0; end < initdata.size(); end++) {
 			if (initdata[end] == ',' || initdata[end] == '\n') {
@@ -140,6 +148,9 @@ bool level::addbg(int tile, int x, int y)
 	}
 	return false;
 }
+
+
+
 bool level::addfg(int tile, int x, int y)
 {
 	if (tile > 0) {
@@ -155,6 +166,117 @@ bool level::addfg(int tile, int x, int y)
 		}
 	}
 	return false;
+}
+
+
+
+void level::handlezones(tmxtag currentlayer)
+{
+	bool cir;
+	for (int i = 0; i < currentlayer.tagcount();i++) {
+		tmxtag obj = currentlayer.get(i);
+		if (obj.head("width").compare("none") == 0) {//tirangle
+			maketriangle(obj);
+		}
+		else {
+			cir = false;
+			for (int ii = 0; ii < obj.tagcount(); ii++) {
+				if (obj.get(ii).head("type").compare("ellipse")==0) {
+					makecircle(obj);
+					cir = true;
+				}
+			}
+			if (cir == false) {
+				rectangle(obj);
+			}
+		}
+	}
+}
+
+bool level::maketriangle(tmxtag obj)
+{
+	int x = stoi(obj.head("x"));
+	int y = stoi(obj.head("y"));
+	hitbox tri;
+	propertyholder prop;
+	int nums[6];
+	string point;
+	for (int i = 0; i < obj.tagcount(); i++) {
+		if (obj.get(i).head("type").compare("polygon")==0) {
+			point = obj.get(i).head("points");
+			int s, e;
+			
+			for (int ii = 0; ii < 5; ii++) {
+				s = 0;
+				if (point.find(',') < point.find(' ')) {
+					e = point.find(',');
+				}
+				else {
+					e= point.find(' ');
+				}
+
+				nums[ii] = stoi(point.substr(s, e - s));
+				point = point.substr(e+1);
+				
+			}
+			nums[5] = stoi(point.substr(s));
+			tri = hitbox(x+nums[0],y+nums[1],x+ nums[2], y+nums[3], x+nums[4],y+ nums[5]);
+
+		}
+		else if(obj.get(i).head("type").compare("properties")==0) {
+			prop = decode(obj.get(i));
+		}
+	}
+	blocks.push_back(zone(tri,prop));
+
+
+	return false;
+}
+
+bool level::makecircle(tmxtag obj)
+{
+	int x = stoi(obj.head("x"));
+	int y = stoi(obj.head("y"));
+	int radius = stoi(obj.head("width")) / 2;
+
+	hitbox cir = hitbox(x+radius,y+radius,radius);
+	propertyholder prop;
+	string point;
+	for (int i = 0; i < obj.tagcount(); i++) {
+		if (obj.get(i).head("type").compare("properties") == 0) {
+			prop = decode(obj.get(i));
+		}
+	}
+	blocks.push_back(zone(cir, prop));
+	return false;
+}
+
+bool level::rectangle(tmxtag obj)
+{
+	int x = stoi(obj.head("x"));
+	int y = stoi(obj.head("y"));
+	int w = stoi(obj.head("width"));
+	int h = stoi(obj.head("height"));
+	hitbox rec = hitbox(x, y, w,h);
+	propertyholder prop;
+	string point;
+	for (int i = 0; i < obj.tagcount(); i++) {
+		if (obj.get(i).head("type").compare("properties") == 0) {
+			prop = decode(obj.get(i));
+		}
+	}
+	blocks.push_back(zone(rec, prop));
+	return false;
+}
+
+propertyholder level::decode(tmxtag list)
+{
+	propertyholder end = propertyholder();
+	for (int i = 0; i < list.tagcount(); i++) {
+		end.add(list.get(i).head("name"), list.get(i).head("value"));
+	}
+
+	return end;
 }
 
 int level::getwidth()

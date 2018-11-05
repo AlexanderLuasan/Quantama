@@ -47,7 +47,7 @@ triangle::triangle(int x1, int y1, int x2, int y2, int x3, int y3)
 	this->setW(maxx - minx);
 	this->setH(maxy - miny);
 	
-	slope = true;
+	slope = false;
 	for (int i = 0; i < 3; i++) {
 		for (int ii = 0; ii < 3; ii++) {
 			if (i != ii) {
@@ -59,8 +59,8 @@ triangle::triangle(int x1, int y1, int x2, int y2, int x3, int y3)
 				}
 			}
 			else {
-				if (xs[i] == this->getX() && ys[i] == this->getY() && xs[ii] == this->left() && ys[ii] == this->bottom()) {
-					slope = false;
+				if (xs[i] == minx && ys[i] == miny) {
+					slope = true;
 				}
 			}
 		}

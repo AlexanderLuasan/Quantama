@@ -302,7 +302,7 @@ string tmxtag::head(string key)
 			return values[i];
 		}
 	}
-	return "can't find feild";
+	return "none";
 }
 
 int tmxtag::tagcount()

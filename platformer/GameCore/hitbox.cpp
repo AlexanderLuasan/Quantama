@@ -1,6 +1,10 @@
 #include "hitbox.h"
 
 
+hitbox::hitbox()
+{
+}
+
 hitbox::hitbox(int x, int y, int width, int height)
 {
 	self = new rectangle(x, y, width, height);
