@@ -117,20 +117,21 @@ int triangle::leftR(collisionobj * other)
 	else if (slope == false && down == false) {
 		return this->left();
 	}
+
 	int pos;
 	if (down) {
-		pos = other->bottom();
+		pos = this->bottom() - other->bottom();
 	}
 	else {
-		pos = other->top();
+		pos = other->top() - this->top();
 	}
-	if (pos < this->top()) {
-		pos = this->top();
+
+
+	int end = this->left() - (double(-this->getW()) / this->getH() * pos);
+	if (end<this->left() || end>this->right()) {
+		end = this->left();
 	}
-	else if (pos>this->bottom()) {
-		pos = this->bottom();
-	}
-	return double(this->getW()) / this->getH()*pos;
+	return end;
 }
 
 int triangle::rightR(collisionobj * other)
@@ -142,66 +143,63 @@ int triangle::rightR(collisionobj * other)
 		return this->right();
 	}
 	int pos;
-	if (down) {
-		pos = other->bottom();
+	if (!slope) {
+		pos = this->bottom() - other->bottom();
 	}
 	else {
-		pos = other->top();
-	}
-	if (pos < this->top()) {
-		pos = this->top();
-	}
-	else if (pos>this->bottom()) {
-		pos = this->bottom();
+		pos = other->top()-this->top();
 	}
 
-	return double(this->getW()) / this->getH()*pos;
+	int end = this->right() + (double(this->getW()) / this->getH()*pos);
+	if (end<this->left() || end>this->right()) {
+		end = this->right();
+	}
+	return end;
+	
 }
 
 int triangle::bottomR(collisionobj * other)
 {
-	if (slope == false && down == false) {
+	if (slope == false && down == true) {
 		return this->bottom();
 	}
-	else if (slope == true && down == true) {
+	else if (slope == true && down == false) {
 		return this->bottom();
 	}
 	int pos;
-	if (down) {
-		pos = other->left();
+	if (slope) {
+		pos = other->left()- this->left();
 	}
 	else {
-		pos = other->right();
+		pos = this->right()-other->right();
 	}
-	if (pos < this->left()) {
-		pos = this->left();
+	int end = this->bottom() + double(this->getH()) / this->getW()*pos;
+	if (end > this->bottom() || end < this->top()) {
+		return this->bottom();
 	}
-	else if (pos>this->right()) {
-		pos = this->right();
-	}
-	return double(this->getH()) / this->getW()*pos;
+
+	return end;
 }
 
 int triangle::topR(collisionobj * other)
 {
-	if (slope == true && down == false) {
+	if (slope == true && down == true) {
 		return this->top();
 	}
-	else if (slope == false && down == true) {
+	else if (slope == false && down == false) {
 		return this->top();
 	}
 	int pos;
-	if (down) {
-		pos = other->left();
+	if (slope) {
+		pos = other->left()-this->left();
 	}
 	else {
-		pos = other->right();
+		pos = this->right()-other->right();
 	}
-	if (pos < this->left()) {
-		pos = this->left();
+
+	int end = this->top() + double(this->getH()) / this->getW()*pos;
+	if (end > this->bottom() || end < this->top()) {
+		return this->top();
 	}
-	else if (pos>this->right()) {
-		pos = this->right();
-	}
-	return double(this->getH()) / this->getW()*pos;
+	return end;
 }

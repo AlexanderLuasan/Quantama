@@ -12,6 +12,9 @@ level::level()
 
 level::level(string levelname)
 {
+
+	imagesheets.push_back(sheetlist(string(path) + "firstunsizedtiles.tmx"));
+
 	tmxtag file = tmxtag(string(path) + levelname,0);
 
 	
@@ -193,6 +196,17 @@ void level::handlezones(tmxtag currentlayer)
 	}
 }
 
+ALLEGRO_BITMAP * level::artsearch(string name)
+{
+	for (int i = 0; i < imagesheets.size(); i++) {
+		if (imagesheets[i].getimage(name) != nullptr) {
+			return imagesheets[i].getimage(name);
+		}
+	}
+	cout << "help";
+
+}
+
 bool level::maketriangle(tmxtag obj)
 {
 	int x = stoi(obj.head("x"));
@@ -260,12 +274,21 @@ bool level::rectangle(tmxtag obj)
 	hitbox rec = hitbox(x, y, w,h);
 	propertyholder prop;
 	string point;
+	art image;
 	for (int i = 0; i < obj.tagcount(); i++) {
 		if (obj.get(i).head("type").compare("properties") == 0) {
 			prop = decode(obj.get(i));
 		}
 	}
-	blocks.push_back(zone(rec, prop));
+	if (prop.isin("image")) {
+		image = art(this->artsearch(prop.get("image")));
+	}
+	else {
+		image = art();
+	}
+	zone end = zone(rec, prop);
+	end.addimage(image);
+	blocks.push_back(end);
 	return false;
 }
 

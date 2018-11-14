@@ -122,6 +122,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="animationsheet.cpp" />
+    <ClCompile Include="art.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="GameCore\circle.cpp" />
     <ClCompile Include="GameCore\collisionObject.cpp" />
@@ -136,11 +138,14 @@
     <ClCompile Include="GameCore\triangle.cpp" />
     <ClCompile Include="level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="nonuniformartsheet.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="propertiesholder.cpp" />
     <ClCompile Include="zone.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animationsheet.h" />
+    <ClInclude Include="art.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="GameCore\circle.h" />
     <ClInclude Include="GameCore\collisionObject.h" />
@@ -154,6 +159,7 @@
     <ClInclude Include="GameCore\tilesheet.h" />
     <ClInclude Include="GameCore\triangle.h" />
     <ClInclude Include="level.h" />
+    <ClInclude Include="nonuniformartsheet.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="propertiesholder.h" />
     <ClInclude Include="zone.h" />

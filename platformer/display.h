@@ -16,6 +16,7 @@ public:
 	bool drawview();
 	bool draw(ALLEGRO_BITMAP*image,int x,int y,int w,int h);
 	bool draw(poly shape);
+	bool draw(int x, int y, int w, int h);
 private:
 	int scale;
 	int camx;

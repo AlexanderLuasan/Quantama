@@ -7,7 +7,7 @@ propertyholder::propertyholder()
 bool propertyholder::add(string key, string value)
 {
 	keys.push_back(key);
-	keys.push_back(value);
+	values.push_back(value);
 
 
 	return true;

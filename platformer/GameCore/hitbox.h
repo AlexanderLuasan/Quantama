@@ -37,6 +37,11 @@ public:
 	int top(hitbox other);
 	int bottom(hitbox other);
 
+	int left();
+	int right();
+	int top();
+	int bottom();
+
 private:
 	collisionobj * self;
 

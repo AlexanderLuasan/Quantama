@@ -58,26 +58,42 @@ int main() {
 			al_get_keyboard_state(&keys);
 
 			if (al_key_down(&keys, ALLEGRO_KEY_UP) && al_key_down(&keys, ALLEGRO_KEY_DOWN)) {
-
+				hero.setyaim(0);
 			}
 			else if (al_key_down(&keys, ALLEGRO_KEY_DOWN)) {
-				hero.adjpos(0, 1);
+				hero.setyaim(1);
 			}
 			else if(al_key_down(&keys, ALLEGRO_KEY_UP)) {
-				hero.adjpos(0, -1);
+				hero.setyaim(-1);
+			}
+			else {
+				hero.setyaim(0);
 			}
 			if (al_key_down(&keys, ALLEGRO_KEY_LEFT)&& al_key_down(&keys, ALLEGRO_KEY_RIGHT)) {
-
+				hero.setxaim(0);
 			}
 			else if (al_key_down(&keys, ALLEGRO_KEY_LEFT)) {
-				hero.adjpos(-1, 0);
+				hero.setxaim(-1);
 			}
 			else if (al_key_down(&keys, ALLEGRO_KEY_RIGHT)) {
-				hero.adjpos(1, 0);
+				hero.setxaim(1);
 			}
+			else {
+				hero.setxaim(0);
+			}
+			if (al_key_down(&keys, ALLEGRO_KEY_SPACE)) {
+				hero.setjump(true);
+			}
+			else {
+				hero.setjump(false);
+			}
+			hero.positionupdate();
 
-
-
+			for (int i = 0; i < first.blocks.size(); i++) {
+				if (first.blocks[i].gethit().collision(hero.getcollision())) {
+					hero.collisionWall(first.blocks[i].gethit().left(hero.getcollision()), first.blocks[i].gethit().top(hero.getcollision()), first.blocks[i].gethit().right(hero.getcollision()), first.blocks[i].gethit().bottom(hero.getcollision()));
+				}
+			}
 
 
 
@@ -89,6 +105,14 @@ int main() {
 			screen.draw(backgound.draw(), 0, 0, backgound.getwidth(), backgound.getheight());
 			for (int i = 0; i < first.blocks.size(); i++) {
 				screen.draw(first.blocks[i].getdraw());
+				int x = first.blocks[i].gethit().left(hero.getcollision());
+				int y = first.blocks[i].gethit().top(hero.getcollision());
+				int w = first.blocks[i].gethit().right(hero.getcollision());
+				int h = first.blocks[i].gethit().bottom(hero.getcollision());
+				//screen.draw(x, y, w, h);
+				if (first.blocks[i].getImage() != nullptr) {
+					screen.draw(first.blocks[i].getImage(), x, y, w-x, h-y);
+				}
 			}
 			screen.draw(hero.getdraw());
 			al_flip_display();

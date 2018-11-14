@@ -122,3 +122,9 @@ bool display::draw(poly shape)
 	al_draw_line(scale*(x + x1 + globaladjust - camx), scale*(y + y1 + globaladjust - camy), scale*(x + x2 + globaladjust - camx), scale*(y + y2 + globaladjust - camy), al_map_rgb(0, 0, 0), 4);
 	return false;
 }
+
+bool display::draw(int x, int y, int w, int h)
+{
+	al_draw_rectangle(scale*(x-camx + globaladjust), scale*(y-camy + globaladjust),scale*( w-camx + globaladjust),scale*( h-camy+globaladjust),al_map_rgb(0,0,0),2);
+	return false;
+}

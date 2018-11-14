@@ -1,5 +1,5 @@
 #include "hitbox.h"
-
+#include <iostream>
 
 hitbox::hitbox()
 {
@@ -45,9 +45,16 @@ poly hitbox::getcollision(hitbox other)
 bool hitbox::collision(hitbox other)
 {
 	if (self->simplecolide(other.self)) {
-		if (self->Collision(other.self)&&other.self->Collision(self)) {
+		if (self->id() == 3) {
+			if (self->Collision(other.self)){
+				return true;
+			}
+		}
+		else if (self->Collision(other.self)&&other.self->Collision(self)) {//change to type prioity
 			return true;
 		}
+
+
 	}
 	return false;
 }
@@ -110,5 +117,25 @@ int hitbox::top(hitbox other)
 int hitbox::bottom(hitbox other)
 {
 	return self->bottomR(other.self);
+}
+
+int hitbox::left()
+{
+	return this->self->left();
+}
+
+int hitbox::right()
+{
+	return this->self->right();
+}
+
+int hitbox::top()
+{
+	return self->top();
+}
+
+int hitbox::bottom()
+{
+	return this->self->bottom();
 }
 

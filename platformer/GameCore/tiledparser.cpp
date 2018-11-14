@@ -54,7 +54,7 @@ tmxtag::tmxtag(string space)
 		while (values[i][0] == ' ' || values[i][0] == '<' || values[i][0] == '"') {
 			values[i] = values[i].substr(1, values[i].size() - 1);
 		}
-		while (values[i][values[i].size() - 1] == ' ' || values[i][values[i].size() - 1] == '>' || values[i][values[i].size() - 1] == '"') {
+		while (values[i][values[i].size() - 1] == ' ' || values[i][values[i].size() - 1] == '>' || values[i][values[i].size() - 1] == '"' || values[i][values[i].size() - 1] == '/') {
 			values[i] = values[i].substr(0, values[i].size() - 1);
 		}
 

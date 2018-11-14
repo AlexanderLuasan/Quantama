@@ -3,6 +3,7 @@
 #include "GameCore/hitbox.h"
 #include "GameCore/plate.h"
 #include "GameCore/tilesheet.h"
+#include "nonuniformartsheet.h"
 #include "zone.h"
 #include <string>
 #include <vector>
@@ -22,6 +23,7 @@ public:
 
 
 	void handlezones(tmxtag currentlayer);
+	ALLEGRO_BITMAP * artsearch(string name);
 	bool maketriangle(tmxtag obj);
 	bool makecircle(tmxtag obj);
 	bool rectangle(tmxtag obj);
@@ -34,7 +36,7 @@ public:
 	vector<zone> blocks;
 	plate getbg();
 private:
-
+	
 
 	int tileheight;
 	int tilewidth;
@@ -42,7 +44,7 @@ private:
 	int height;
 
 	vector<sheet> tilesheets;
-
+	vector<sheetlist> imagesheets;
 	plate fg;
 	plate bg;
 

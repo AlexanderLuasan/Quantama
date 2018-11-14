@@ -11,6 +11,16 @@ zone::zone(hitbox hit, propertyholder data)
 	mydata = data;
 }
 
+void zone::addimage(art image)
+{
+	myimage = image;
+}
+
+ALLEGRO_BITMAP * zone::getImage()
+{
+	return myimage.getimg();
+}
+
 hitbox zone::gethit()
 {
 	return collision;

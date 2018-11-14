@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="574" tileheight="150" infinite="0" nextobjectid="3">
+ <tileset firstgid="1" name="things" tilewidth="574" tileheight="150" tilecount="1" columns="1">
+  <image source="things.png" width="574" height="150"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="1" height="1">
+  <data encoding="csv">
+1
+</data>
+ </layer>
+ <objectgroup name="shapes">
+  <object id="2" name="shovel" x="164" y="50" width="39" height="24"/>
+ </objectgroup>
+</map>
