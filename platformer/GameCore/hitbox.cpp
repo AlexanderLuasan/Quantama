@@ -139,3 +139,13 @@ int hitbox::bottom()
 	return this->self->bottom();
 }
 
+int hitbox::centerx()
+{
+	return (this->left() + this->right()) / 2;
+}
+
+int hitbox::centery()
+{
+	return (this->top()+this->bottom())/2;
+}
+

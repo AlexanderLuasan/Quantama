@@ -118,7 +118,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="images\firstunsizedtiles.tmx" />
     <None Include="images\map.tmx" />
+    <None Include="images\player.tmx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +168,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\bg.png" />
+    <Image Include="images\player.png" />
+    <Image Include="images\things.png" />
     <Image Include="images\tiles.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

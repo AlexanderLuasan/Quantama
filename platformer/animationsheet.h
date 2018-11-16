@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <allegro5/allegro.h>
+#define pathtofiles "./images/"
 using namespace std;
 
 
@@ -27,17 +28,22 @@ class animationset
 {
 
 public:
+	animationset();
+	animationset(string pathtodoc);
+	void decode(tmxtag group, int index);
 
 
 	void setanimation(string nameofanimation);
 	void nextframe();
 
-	
-
+	ALLEGRO_BITMAP * getimage();
+	rectangle gethit();
+	rectangle getImgBox();
+	 
 private:
-	int animation;
+	int animationindex;
 	int frame;
-	vector<int> animations;
+	vector<animation> animations;
 	ALLEGRO_BITMAP * sheet;
 	vector<string> animationnames;
 	

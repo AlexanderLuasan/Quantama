@@ -42,6 +42,8 @@ public:
 	int top();
 	int bottom();
 
+	int centerx();
+	int centery();
 private:
 	collisionobj * self;
 

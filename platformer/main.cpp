@@ -22,7 +22,7 @@ int main() {
 
 	//player
 	player hero = player(30, 30);
-
+	hero.setupimage();
 	
 	ALLEGRO_EVENT_QUEUE * queue;
 	ALLEGRO_TIMER * timer;
@@ -115,6 +115,11 @@ int main() {
 				}
 			}
 			screen.draw(hero.getdraw());
+
+			
+			hero.animate();
+			hitbox im = hero.getAnimationBox();
+			screen.draw(hero.getAnimationImage(),im.getx(),im.gety(),im.right()-im.getx(),im.bottom()-im.gety());
 			al_flip_display();
 
 

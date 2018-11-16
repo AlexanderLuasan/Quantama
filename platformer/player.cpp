@@ -2,16 +2,19 @@
 #include <iostream>
 player::player()
 {
-
+	myanimations = animationset("player.tmx");
 }
 
 player::player(int x, int y)
 {
+	myanimations = animationset("player.tmx");
 	inair = true;
 	collision = hitbox(0, 0, 16, 16);
 	collision.setx(x - 8);
 	collision.sety(y - 16);
-
+	animationstate = "idle";
+	this->setupimage();
+	animationcounter = 0;
 }
 
 bool player::setpos(int x, int y)
@@ -112,6 +115,75 @@ void player::positionupdate()
 	this->adjpos(vel[0]*xmaxspeed/100,vel[1]*terminalvel/100);
 
 
+}
+
+void player::animate()
+{
+	if (animationstate.compare("idle") == 0) {
+		
+		animationcounter += 1;
+		if (animationcounter > 10) {
+			cout << "idle" << endl;
+			animationcounter = 0;
+			this->setanimation("startidle");
+		}
+	}
+	else if (animationstate.compare("startidle") == 0) {
+		
+		animationcounter += 1;
+		if (animationcounter > 10) {
+			animationcounter = 0;
+			cout << "toidle" << endl;
+			myanimations.nextframe();
+			this->setupimage();
+		}
+	}
+	this->setupimagebox();
+
+}
+
+void player::setupimage()
+{
+	image = myanimations.getimage();
+	rectangle im = myanimations.getImgBox();
+	rectangle hit = myanimations.gethit();
+
+	up = hit.bottom()-im.top();
+	left = hit.centerx() - im.left();
+
+	imagebox = hitbox(0,0,im.getW(),im.getH());
+	this->setupimagebox();
+}
+
+void player::setupimagebox()
+{
+	imagebox.setx(collision.centerx()-left);
+	imagebox.sety(collision.bottom() - up);
+
+}
+
+void player::setanimation(const char * name)
+{
+	animationstate = string(name);
+	animationcounter = 0;
+
+	if (animationstate.compare("idle")==0) {
+		myanimations.setanimation("idle");
+	}
+	else if (animationstate.compare("startidle")==0) {
+		myanimations.setanimation("toidle");
+	}
+
+}
+
+ALLEGRO_BITMAP * player::getAnimationImage()
+{
+	return image;
+}
+
+hitbox player::getAnimationBox()
+{
+	return imagebox;
 }
 
 void player::collisionWall(int left, int top, int right, int bottom)

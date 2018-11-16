@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="680" tileheight="1087" infinite="0" nextobjectid="27">
+ <tileset firstgid="1" name="image" tilewidth="680" tileheight="1087" tilecount="1" columns="1">
+  <image source="player.png" width="680" height="1087"/>
+ </tileset>
+ <layer name="Copy of Tile Layer 1" width="1" height="1">
+  <data encoding="csv">
+1
+</data>
+ </layer>
+ <objectgroup name="idle">
+  <object id="1" name="img0" x="8" y="22" width="23" height="62"/>
+  <object id="2" name="hit0" x="11" y="22" width="20" height="60"/>
+ </objectgroup>
+ <objectgroup name="toidle">
+  <object id="5" name="hit0" x="50" y="22" width="20" height="60"/>
+  <object id="6" name="hit1" x="80" y="21" width="20" height="60"/>
+  <object id="7" name="hit2" x="108" y="21" width="20" height="60"/>
+  <object id="8" name="hit3" x="140" y="21" width="20" height="60"/>
+  <object id="9" name="hit4" x="165" y="21" width="20" height="60"/>
+  <object id="10" name="hit5" x="193" y="21" width="20" height="60"/>
+  <object id="11" name="hit6" x="220" y="21" width="20" height="60"/>
+  <object id="12" name="hit7" x="246" y="21" width="20" height="60"/>
+  <object id="13" name="hit8" x="275" y="22" width="20" height="60"/>
+  <object id="14" name="hit9" x="305" y="22" width="20" height="60"/>
+  <object id="15" name="hit10" x="337" y="22" width="20" height="60"/>
+  <object id="16" name="img0" x="49" y="21" width="24" height="63"/>
+  <object id="17" name="img1" x="79" y="20" width="24" height="63"/>
+  <object id="18" name="img2" x="108" y="21" width="24" height="63"/>
+  <object id="19" name="img3" x="138" y="21" width="24" height="63"/>
+  <object id="20" name="img4" x="165" y="20" width="24" height="63"/>
+  <object id="21" name="img5" x="193" y="21" width="24" height="63"/>
+  <object id="22" name="img6" x="218" y="20" width="24" height="63"/>
+  <object id="23" name="img7" x="244" y="19" width="27" height="66"/>
+  <object id="24" name="img8" x="274" y="21" width="25" height="65"/>
+  <object id="25" name="img9" x="304" y="21" width="27" height="64"/>
+  <object id="26" name="img10" x="333" y="20" width="30" height="66"/>
+ </objectgroup>
+</map>
