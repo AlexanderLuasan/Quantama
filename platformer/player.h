@@ -33,20 +33,23 @@ public:
 
 	void collisionWall(int left, int top, int right, int bottom);
 	hitbox getcollision();
+	poly getdrawingbox();
 	poly getdraw();
+	bool getflip();
 private:
 
 	int animationcounter;
+	int animationloopcounter;
 	animationset myanimations;
 	ALLEGRO_BITMAP * image;
 	int up, left;
 	hitbox imagebox;
 	string animationstate;
-
+	bool fliped = false;
 
 
 	bool inair;
-	int aim[2];//x then y;
+	int aim[2] = { 0,0 };//x then y;
 	int vel[2] = { 0,0 };
 	hitbox collision;
 

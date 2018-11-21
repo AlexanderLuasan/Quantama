@@ -102,6 +102,65 @@ bool display::draw(ALLEGRO_BITMAP * image, int x, int y, int w, int h)
 	return true;
 }
 
+bool display::draw(ALLEGRO_BITMAP * image, int x, int y, int w, int h, bool flip)
+{
+	int sx, sy, sw, sh;
+	int dx, dy, dw, dh;
+	if (x < camx) {//off left on screen
+		sx = camx - x;
+		dx = 0;
+	}
+	else {
+		sx = 0;
+		dx = x - camx;
+	}
+
+	if (y < camy) {
+		sy = camy - x;
+		dy = 0;
+	}
+	else {
+		sy = 0;
+		dy = y - camy;
+	}
+
+	if (camx + width < x + w) {
+		sw = w - ((x + w) - (camx + width));
+		dw = w - ((x + w) - (camx + width));
+
+	}
+	else {
+		sw = w;
+		dw = w;
+		if (x + w < camx) {
+			dw = 0;
+		}
+	}
+	if (camy + height < y + h) {
+		sh = h - ((y + h) - (camy + height));
+		dh = h - ((y + h) - (camy + height));
+
+	}
+	else {
+		sh = h;
+		dh = h;
+		if (y + h < camy) {
+			dh = 0;
+		}
+	}
+
+	if (dw <= 0 || dh <= 0) {
+		return false;
+	}
+	if (flip) {
+		al_draw_scaled_bitmap(image, sx, sy, sw, sh, scale*(dx + globaladjust), scale*(dy + globaladjust), scale*(dw), scale*(dh), ALLEGRO_FLIP_HORIZONTAL);
+	}
+	else {
+		al_draw_scaled_bitmap(image, sx, sy, sw, sh, scale*(dx + globaladjust), scale*(dy + globaladjust), scale*(dw), scale*(dh),0);
+	}
+	return true;
+}
+
 bool display::draw(poly shape)
 {
 	int x, y;

@@ -119,12 +119,29 @@ void animationset::nextframe()
 	frame = frame % animations[animationindex].frames();
 }
 
+bool animationset::isend()
+{
+	return frame == 0;
+}
+
 ALLEGRO_BITMAP * animationset::getimage()
 {
 
 	rectangle box = animations[animationindex].getimg(frame);
+	rectangle hitbox = animations[animationindex].gethit(frame);
+	
+	int left, right;
+	int width;
+	left = hitbox.centerx() - box.left();
+	right = box.right() - hitbox.centerx();
+	if (left > right) {
+		width = left;
+	}
+	else {
+		width = right;
+	}
 
-	return al_create_sub_bitmap(sheet,box.getX(), box.getY(), box.getW(), box.getH());
+	return al_create_sub_bitmap(sheet, box.getX(), box.getY(), box.getW(), box.getH());
 }
 
 rectangle animationset::gethit()

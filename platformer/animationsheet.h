@@ -35,12 +35,14 @@ public:
 
 	void setanimation(string nameofanimation);
 	void nextframe();
+	bool isend();
 
 	ALLEGRO_BITMAP * getimage();
 	rectangle gethit();
 	rectangle getImgBox();
 	 
 private:
+	bool end;
 	int animationindex;
 	int frame;
 	vector<animation> animations;

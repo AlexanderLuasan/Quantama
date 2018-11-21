@@ -18,7 +18,7 @@ int main() {
 	cout << first.getheight() << "  ";
 	cout << first.getwidth();
 
-	system("pause");
+	//system("pause");
 
 	//player
 	player hero = player(30, 30);
@@ -119,7 +119,8 @@ int main() {
 			
 			hero.animate();
 			hitbox im = hero.getAnimationBox();
-			screen.draw(hero.getAnimationImage(),im.getx(),im.gety(),im.right()-im.getx(),im.bottom()-im.gety());
+			screen.draw(hero.getdrawingbox());
+			screen.draw(hero.getAnimationImage(),im.getx(),im.gety(),im.right()-im.getx(),im.bottom()-im.gety(),hero.getflip());
 			al_flip_display();
 
 

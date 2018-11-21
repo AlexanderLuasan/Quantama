@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="680" tileheight="1087" infinite="0" nextobjectid="27">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="680" tileheight="1087" infinite="0" nextobjectid="114">
  <tileset firstgid="1" name="image" tilewidth="680" tileheight="1087" tilecount="1" columns="1">
   <image source="player.png" width="680" height="1087"/>
  </tileset>
@@ -8,11 +8,46 @@
 1
 </data>
  </layer>
- <objectgroup name="idle">
+ <objectgroup name="startrun" visible="0">
+  <object id="49" name="hit0" x="15" y="123" width="20" height="57"/>
+  <object id="52" name="hit1" x="51" y="123" width="20" height="57"/>
+  <object id="53" name="hit3" x="112" y="123" width="20" height="57"/>
+  <object id="54" name="hit2" x="82" y="123" width="20" height="57"/>
+  <object id="55" name="hit4" x="143" y="123" width="20" height="57"/>
+  <object id="56" name="hit5" x="174" y="123" width="20" height="57"/>
+  <object id="57" name="img0" x="6" y="118" width="36" height="63"/>
+  <object id="60" name="img1" x="43" y="118" width="36" height="63"/>
+  <object id="61" name="img2" x="79" y="118" width="27" height="63"/>
+  <object id="62" name="img3" x="107" y="118" width="28" height="63"/>
+  <object id="63" name="img4" x="136" y="118" width="32" height="63"/>
+  <object id="64" name="img5" x="170" y="118" width="27" height="63"/>
+  <object id="112" name="hit6" x="217" y="122" width="20" height="57"/>
+  <object id="113" name="img6" x="213" y="118" width="27" height="63"/>
+ </objectgroup>
+ <objectgroup name="stoprun" visible="0">
+  <object id="84" name="hit0" x="531" y="123" width="20" height="57"/>
+  <object id="85" name="img0" x="516" y="120" width="46" height="64"/>
+ </objectgroup>
+ <objectgroup name="runloop" visible="0">
+  <object id="88" name="hit0" x="260" y="123" width="20" height="57"/>
+  <object id="89" name="hit1" x="301" y="123" width="20" height="57"/>
+  <object id="90" name="hit2" x="344" y="123" width="20" height="57"/>
+  <object id="91" name="hit3" x="390" y="123" width="20" height="57"/>
+  <object id="92" name="hit4" x="430" y="123" width="20" height="57"/>
+  <object id="93" name="hit5" x="468" y="123" width="20" height="57"/>
+  <object id="94" name="img0" x="250" y="120" width="40" height="65"/>
+  <object id="95" name="img1" x="294" y="119" width="34" height="65"/>
+  <object id="96" name="img2" x="333" y="119" width="41" height="65"/>
+  <object id="97" name="img3" x="379" y="120" width="44" height="65"/>
+  <object id="98" name="img4" x="426" y="121" width="30" height="65"/>
+  <object id="99" name="img5" x="460" y="120" width="40" height="64"/>
+ </objectgroup>
+ <objectgroup name="idle" visible="0">
   <object id="1" name="img0" x="8" y="22" width="23" height="62"/>
   <object id="2" name="hit0" x="11" y="22" width="20" height="60"/>
+  <object id="48" name="hit0" x="11" y="22" width="20" height="60"/>
  </objectgroup>
- <objectgroup name="toidle">
+ <objectgroup name="toidle" visible="0">
   <object id="5" name="hit0" x="50" y="22" width="20" height="60"/>
   <object id="6" name="hit1" x="80" y="21" width="20" height="60"/>
   <object id="7" name="hit2" x="108" y="21" width="20" height="60"/>
@@ -35,5 +70,25 @@
   <object id="24" name="img8" x="274" y="21" width="25" height="65"/>
   <object id="25" name="img9" x="304" y="21" width="27" height="64"/>
   <object id="26" name="img10" x="333" y="20" width="30" height="66"/>
+ </objectgroup>
+ <objectgroup name="smokeloop" visible="0">
+  <object id="27" name="hit0" x="371" y="23" width="20" height="60"/>
+  <object id="28" name="hit1" x="406" y="23" width="20" height="60"/>
+  <object id="29" name="hit2" x="442" y="23" width="20" height="60"/>
+  <object id="33" name="img0" x="365" y="19" width="31" height="67"/>
+  <object id="34" name="img1" x="400" y="20" width="31" height="67"/>
+  <object id="35" name="img2" x="437" y="19" width="31" height="67"/>
+ </objectgroup>
+ <objectgroup name="reidleloop">
+  <object id="36" name="hit0" x="481" y="23" width="20" height="60"/>
+  <object id="37" name="hit1" x="510" y="23" width="20" height="60"/>
+  <object id="38" name="hit2" x="542" y="23" width="20" height="60"/>
+  <object id="39" name="img0" x="474" y="20" width="31" height="67"/>
+  <object id="40" name="img1" x="505" y="20" width="31" height="67"/>
+  <object id="41" name="img2" x="537" y="20" width="31" height="67"/>
+  <object id="42" name="hit3" x="307" y="23" width="20" height="60"/>
+  <object id="43" name="img3" x="302" y="19" width="31" height="67"/>
+  <object id="44" name="hit4" x="338" y="23" width="20" height="60"/>
+  <object id="45" name="img4" x="334" y="19" width="31" height="67"/>
  </objectgroup>
 </map>

@@ -13,8 +13,11 @@ player::player(int x, int y)
 	collision.setx(x - 8);
 	collision.sety(y - 16);
 	animationstate = "idle";
+	this->setanimation("idle");
 	this->setupimage();
 	animationcounter = 0;
+	animationloopcounter = 0;
+	
 }
 
 bool player::setpos(int x, int y)
@@ -112,32 +115,73 @@ void player::positionupdate()
 		vel[1] += 3;
 	}
 
-	this->adjpos(vel[0]*xmaxspeed/100,vel[1]*terminalvel/100);
+	if (vel[0] < 0) {
+		fliped = true;
+	}
+	else if(vel[0] > 0){
+		fliped = false;
+	}
+	//this->adjpos(vel[0]*xmaxspeed/100,0);
+	this->adjpos(0,vel[1] * terminalvel / 100);
 
 
 }
 
 void player::animate()
-{
-	if (animationstate.compare("idle") == 0) {
+{//vars that change things inair, aim, velocity,
+	animationcounter += 1;
+	if (animationcounter > 6) {
+		animationcounter = 0;
 		
-		animationcounter += 1;
-		if (animationcounter > 10) {
-			cout << "idle" << endl;
-			animationcounter = 0;
-			this->setanimation("startidle");
+		cout << animationstate << ":" << vel[0]*aim[0] << endl;
+		this->myanimations.nextframe();
+		this->setupimage();
+		if (myanimations.isend()) {
+			animationloopcounter += 1;
+		}
+
+	}
+
+	if (vel[0] == 0) {
+		if (animationstate.compare("idle")==0) {
+			if (animationloopcounter > 10) {
+				this->setanimation("startidle");
+			}
+		}
+		else if (animationstate.compare("startidle")==0) {
+			if (animationloopcounter > 0) {
+				this->setanimation("smokeloop");
+			}
+		}
+		else if (animationstate.compare("smokeloop")==0) {
+			if (animationloopcounter > 4) {
+				this->setanimation("resmoke");
+			}
+		}
+		else if (animationstate.compare("resmoke")==0) {
+			if (animationloopcounter > 0) {
+				this->setanimation("smokeloop");
+			}
+		}
+		else {
+			this->setanimation("idle");
 		}
 	}
-	else if (animationstate.compare("startidle") == 0) {
-		
-		animationcounter += 1;
-		if (animationcounter > 10) {
-			animationcounter = 0;
-			cout << "toidle" << endl;
-			myanimations.nextframe();
-			this->setupimage();
+	else if (vel[0]!=0&&!inair) {
+		if (vel[0] * aim[0] < 0 || (aim[0]==0&&abs(vel[0])>0)) {//stoping
+			this->setanimation("endrun");
+		}
+		else if (abs(vel[0]) > 60) {//moving quickly
+			this->setanimation("midrun");
+		}
+		else if (abs(vel[0]) > 0) {//slowleft
+			this->setanimation("startrun");
 		}
 	}
+
+	
+	
+
 	this->setupimagebox();
 
 }
@@ -157,22 +201,42 @@ void player::setupimage()
 
 void player::setupimagebox()
 {
-	imagebox.setx(collision.centerx()-left);
-	imagebox.sety(collision.bottom() - up);
-
+	if (!fliped) {
+		imagebox.setx(collision.centerx() - left);
+		imagebox.sety(collision.bottom() - up);
+	}
+	else {
+		imagebox.setx(collision.centerx() - ((imagebox.right()-imagebox.left())-left));
+		imagebox.sety(collision.bottom() - up);
+	}
 }
 
 void player::setanimation(const char * name)
 {
 	animationstate = string(name);
-	animationcounter = 0;
-
+	animationloopcounter = 0;
 	if (animationstate.compare("idle")==0) {
 		myanimations.setanimation("idle");
 	}
 	else if (animationstate.compare("startidle")==0) {
 		myanimations.setanimation("toidle");
 	}
+	else if (animationstate.compare("smokeloop") == 0) {
+		myanimations.setanimation("smokeloop");
+	}
+	else if (animationstate.compare("resmoke") == 0) {
+		myanimations.setanimation("reidleloop");
+	}
+	else if (animationstate.compare("startrun") == 0) {
+		myanimations.setanimation("startrun");
+	}
+	else if (animationstate.compare("midrun") == 0) {
+		myanimations.setanimation("runloop");
+	}
+	else if (animationstate.compare("endrun") == 0) {
+		myanimations.setanimation("stoprun");
+	}
+	this->setupimage();
 
 }
 
@@ -233,7 +297,17 @@ hitbox player::getcollision()
 	return collision;
 }
 
+poly player::getdrawingbox()
+{
+	return imagebox.getdraw();
+}
+
 poly player::getdraw()
 {
 	return collision.getdraw();
+}
+
+bool player::getflip()
+{
+	return fliped;
 }
