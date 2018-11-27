@@ -6,7 +6,7 @@ display::display(int w, int h, int s)
 	camy = 0;
 	width = w;
 	height = h;
-	screen = al_create_display(width*globalscale*s, height*globalscale*s);
+	screen = al_create_display((width+2*globaladjust)*globalscale*s, (height+ 2*globaladjust)*globalscale*s);
 	scale = s;
 
 }
@@ -14,6 +14,55 @@ display::display(int w, int h, int s)
 ALLEGRO_DISPLAY * display::gets()
 {
 	return screen;
+}
+
+void display::CamCenter(int x, int y)
+{
+	x -= width/2;
+	y -= height/2;
+	if (x > camx+64&&camax<maxcamspeed) {
+		camax += 1;
+	}
+	else if (x < camx- 64 &&camax>-maxcamspeed) {
+		camax -= 1;
+	}
+	else if (x > camx + 32 && camax<maxcamspeed/2) {
+		camax += 1;
+	}
+	else if (x < camx - 32 && camax>-maxcamspeed/2) {
+		camax -= 1;
+	}
+	else if(x > camx - 32 && x < camx + 32){
+		if (camax > 0) {
+			camax -= 1;
+		}
+		else if(camax<0) {
+			camax += 1;
+		}
+	}
+
+	if (y > camy + 64 && camay<maxcamspeed) {
+		camay += 1;
+	}
+	else if (y < camy - 64 && camay>-maxcamspeed) {
+		camay -= 1;
+	}
+	else if (y > camy + 32 && camay<maxcamspeed / 2) {
+		camay += 1;
+	}
+	else if (y < camy - 32 && camay>-maxcamspeed / 2) {
+		camay -= 1;
+	}
+	else if (y > camy - 32 && y < camy + 32) {
+		if (camay > 0) {
+			camay -= 1;
+		}
+		else if (camay<0) {
+			camay += 1;
+		}
+	}
+
+	this->adjCam(camax, camay);
 }
 
 bool display::setCam(int x, int y)
@@ -58,7 +107,7 @@ bool display::draw(ALLEGRO_BITMAP * image, int x, int y, int w, int h)
 	}
 	
 	if (y < camy) {
-		sy = camy - x;
+		sy = camy - y;
 		dy = 0;
 	}
 	else {
@@ -67,25 +116,25 @@ bool display::draw(ALLEGRO_BITMAP * image, int x, int y, int w, int h)
 	}
 
 	if (camx + width < x + w) {
-		sw = w-((x+w)-(camx+width));
-		dw = w- ((x + w) - (camx + width));
+		sw = (w-sx)-((x+w)-(camx+width));
+		dw = (w-sx)- ((x + w) - (camx + width));
 
 	}
 	else {
-		sw = w;
-		dw = w;
+		sw = w-sx;
+		dw = w-sx;
 		if (x + w < camx) {
 			dw = 0;
 		}
 	}
 	if (camy + height < y + h) {
-		sh = h - ((y + h) - (camy + height));
-		dh = h - ((y + h) - (camy + height));
+		sh = h - ((y + h) - (camy + height))- camy;
+		dh = h - ((y + h) - (camy + height))- camy;
 
 	}
 	else {
-		sh = h;
-		dh = h;
+		sh = h-sy;
+		dh = h-sy;
 		if (y + h < camy) {
 			dh = 0;
 		}
@@ -186,4 +235,19 @@ bool display::draw(int x, int y, int w, int h)
 {
 	al_draw_rectangle(scale*(x-camx + globaladjust), scale*(y-camy + globaladjust),scale*( w-camx + globaladjust),scale*( h-camy+globaladjust),al_map_rgb(0,0,0),2);
 	return false;
+}
+
+bool display::drawview(int x, int y, double angle, double size, int range)
+{
+	
+	int x2 = (double(x) + cos(angle + size)*range) - camx+globaladjust;
+	int y2 = (double(y) + sin(angle + size)*range) - camy + globaladjust;
+
+	int x3 = (double(x) + cos(angle - size)*range) - camx + globaladjust;
+	int y3 = (double(y) + sin(angle - size)*range) - camy + globaladjust;
+	x = x - camx + globaladjust;
+	y = y - camy + globaladjust;
+	al_draw_filled_triangle(x*scale,y*scale,x2*scale,y2*scale,x3*scale,y3*scale,al_map_rgba(125,0,125,125));
+
+	return true;
 }

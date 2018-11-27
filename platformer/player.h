@@ -4,8 +4,10 @@
 #include <string>
 
 
-#define xmaxspeed 10  // 10 pix per sec 
+#define xmaxspeed 4  // 10 pix per sec 
 #define terminalvel 10 
+#define maxjumpvertical 16
+#define maxjumphorizonal 16
 class player
 {
 public:
@@ -49,6 +51,7 @@ private:
 
 
 	bool inair;
+	bool duck;
 	int aim[2] = { 0,0 };//x then y;
 	int vel[2] = { 0,0 };
 	hitbox collision;

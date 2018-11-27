@@ -13,7 +13,7 @@ int main() {
 	al_init_image_addon();
 	al_init_primitives_addon();
 
-	level first("map.tmx");
+	level first("citymap.tmx");
 
 	cout << first.getheight() << "  ";
 	cout << first.getwidth();
@@ -26,7 +26,7 @@ int main() {
 	
 	ALLEGRO_EVENT_QUEUE * queue;
 	ALLEGRO_TIMER * timer;
-	display screen(first.getwidth(), first.getheight(),2);
+	display screen(32*10, 32*6,4);
 	al_install_keyboard();
 	al_install_mouse();
 //	screen = al_create_display(first.getwidth()*2, first.getheight()*2);
@@ -94,33 +94,50 @@ int main() {
 					hero.collisionWall(first.blocks[i].gethit().left(hero.getcollision()), first.blocks[i].gethit().top(hero.getcollision()), first.blocks[i].gethit().right(hero.getcollision()), first.blocks[i].gethit().bottom(hero.getcollision()));
 				}
 			}
-
-
-
+			hero.animate();
+			screen.CamCenter(hero.getcollision().centerx(), hero.getcollision().centery());
 			screen.drawstart();
-			plate backgound = first.getbg();
+			for (int i = 0; i < first.cams.size(); i++) {
+ 				first.cams[i].move();
+			
+			}
+			plate background = first.getbg();
+			plate foreground = first.getfg();
 
-
-			screen.drawview();
-			screen.draw(backgound.draw(), 0, 0, backgound.getwidth(), backgound.getheight());
+		
+			screen.draw(background.draw(), 0, 0, background.getwidth(), background.getheight());
 			for (int i = 0; i < first.blocks.size(); i++) {
 				screen.draw(first.blocks[i].getdraw());
 				int x = first.blocks[i].gethit().left(hero.getcollision());
 				int y = first.blocks[i].gethit().top(hero.getcollision());
 				int w = first.blocks[i].gethit().right(hero.getcollision());
 				int h = first.blocks[i].gethit().bottom(hero.getcollision());
-				//screen.draw(x, y, w, h);
-				if (first.blocks[i].getImage() != nullptr) {
-					screen.draw(first.blocks[i].getImage(), x, y, w-x, h-y);
-				}
+				screen.draw(x, y, w, h);
+
 			}
+			for (int i = 0; i < first.cams.size(); i++) {
+				cammera d = first.cams[i];
+				//cout << d.getx() <<" "<<d.gety() << " " << d.getcolision().getdraw().getPosx()+d.getcolision().getdraw().xpoint(1)<< " " << d.getcolision().getdraw().getPosy()+d.getcolision().getdraw().ypoint(1) << endl;
+				screen.drawview(d.getx(), d.gety(), d.getangle(), d.getanglesize(),d.getrange());
+				screen.draw(d.getcolision().getdraw());
+			}
+			for (int i = 0; i < first.imgs.size(); i++) {
+				rectangle box = first.imgs[i].getbox();
+
+				screen.draw(first.imgs[i].getimg(), box.getX(), box.getY(), box.getW(),box.getH());
+			}
+
+			
 			screen.draw(hero.getdraw());
 
 			
-			hero.animate();
+			
 			hitbox im = hero.getAnimationBox();
 			screen.draw(hero.getdrawingbox());
 			screen.draw(hero.getAnimationImage(),im.getx(),im.gety(),im.right()-im.getx(),im.bottom()-im.gety(),hero.getflip());
+
+			screen.draw(foreground.draw(), 0, 0, foreground.getwidth(), foreground.getheight());
+			screen.drawview();
 			al_flip_display();
 
 

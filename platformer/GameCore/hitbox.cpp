@@ -59,6 +59,22 @@ bool hitbox::collision(hitbox other)
 	return false;
 }
 
+bool hitbox::iswithin(hitbox other)
+{
+	if (self->simplecolide(other.self)) {
+		if (other.bottom()<self->bottomR(other.self)) {
+			if (other.top() > self->topR(other.self)) {
+				if (other.left() > self->leftR(other.self)) {
+					if (other.right() < self->rightR(other.self)) {
+						return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+
 void hitbox::setx(int x)
 {
 	self->setX(x);

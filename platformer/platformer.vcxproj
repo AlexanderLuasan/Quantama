@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="animationsheet.cpp" />
     <ClCompile Include="art.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="GameCore\circle.cpp" />
     <ClCompile Include="GameCore\collisionObject.cpp" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="animationsheet.h" />
     <ClInclude Include="art.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="GameCore\circle.h" />
     <ClInclude Include="GameCore\collisionObject.h" />

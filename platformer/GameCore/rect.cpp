@@ -3,6 +3,14 @@
 using namespace std;
 
 
+rectangle::rectangle()
+{
+	this->setX(1);
+	this->setY(1);
+	this->setW(1);
+	this->setH(1);
+}
+
 rectangle::rectangle(int x, int y, int w, int h)
 {
 	this->setX(x);

@@ -19,7 +19,7 @@ public:
 	poly getcollision(hitbox other);
 
 	bool collision(hitbox other);
-
+	bool iswithin(hitbox other);
 	//moving
 
 	void setx(int x);

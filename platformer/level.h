@@ -7,6 +7,8 @@
 #include "zone.h"
 #include <string>
 #include <vector>
+#include "art.h"
+#include "camera.h"
 class level
 {
 public:
@@ -27,6 +29,8 @@ public:
 	bool maketriangle(tmxtag obj);
 	bool makecircle(tmxtag obj);
 	bool rectangle(tmxtag obj);
+	void handleactors(tmxtag currentlayer);
+	bool makecammera(tmxtag obj);
 	propertyholder decode(tmxtag list);
 
 	int getwidth();
@@ -34,7 +38,10 @@ public:
 
 	//extracting
 	vector<zone> blocks;
+	vector<art> imgs;
+	vector<cammera> cams;
 	plate getbg();
+	plate getfg();
 private:
 	
 

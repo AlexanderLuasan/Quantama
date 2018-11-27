@@ -42,8 +42,10 @@ level::level(string levelname)
 		}
 		else if (currentlayer.head("type").compare("objectgroup") == 0) {
 			if (currentlayer.head("name").compare("zones") == 0) {
-
 				handlezones(currentlayer);
+			}
+			else if (currentlayer.head("name").compare("actors") == 0) {
+				handleactors(currentlayer);
 			}
 		}
 		else {
@@ -82,13 +84,18 @@ void level::handleplates(tmxtag currentlayer)
 	string initdata = currentlayer.get(0).getData();
 	int x = -1;
 	int y = 0;
-	if (currentlayer.head("name").find("bg") != string::npos) {
+	bool backgound = currentlayer.head("name").find("bg") != string::npos;
+	if (true) {
 		for (int end = 0; end < initdata.size(); end++) {
 			if (initdata[end] == ',' || initdata[end] == '\n') {
 				x += 1;
 				int tile = stoi(initdata.substr(0, end));
-
-				this->addbg(tile,x,y);
+				if (backgound) {
+					this->addbg(tile, x, y);
+				}
+				else {
+					this->addfg(tile, x, y);
+				}
 
 
 				break;
@@ -121,17 +128,16 @@ void level::handleplates(tmxtag currentlayer)
 			if (0!= end - start - 1) {
 				int tile = stoi(initdata.substr(start + 1, end - start - 1));
 
-				this->addbg(tile, x, y);
+				if (backgound) {
+					this->addbg(tile, x, y);
+				}
+				else {
+					this->addfg(tile, x, y);
+				}
 			}
 		}
-		//decode csv
-
-
-
 	}
-	else if (currentlayer.head("name").find("fg") != string::npos) {
 
-	}
 }
 
 bool level::addbg(int tile, int x, int y)
@@ -281,15 +287,46 @@ bool level::rectangle(tmxtag obj)
 		}
 	}
 	if (prop.isin("image")) {
-		image = art(this->artsearch(prop.get("image")));
-	}
-	else {
-		image = art();
+		image = art(this->artsearch(prop.get("image")),x,y,w,h);
+		imgs.push_back(image);
 	}
 	zone end = zone(rec, prop);
-	end.addimage(image);
+	
 	blocks.push_back(end);
 	return false;
+}
+
+void level::handleactors(tmxtag currentlayer)
+{
+	for (int i = 0; i < currentlayer.tagcount(); i++) {
+		tmxtag actor = currentlayer.get(i);
+
+		if (actor.head("name").compare("cammera") == 0) {
+			makecammera(actor);
+		}
+	
+	}
+
+}
+
+bool level::makecammera(tmxtag obj)
+{
+	propertyholder prop;
+	for (int i = 0; i < obj.tagcount(); i++) {
+		if (obj.get(i).head("type").compare("properties") == 0) {
+			prop = decode(obj.get(i));
+		}
+	}
+	int x = stoi(obj.head("x"));
+	int y = stoi(obj.head("y"));
+	int range = stoi(prop.get("range"));
+	double cone = stod(prop.get("cone"));
+	double center = stod(prop.get("center"));
+	double size = stod(prop.get("size"));
+	double speed = stod(prop.get("speed"));
+	cammera actor = cammera(x,y,range,cone,center,size,speed);
+	cams.push_back(actor);
+	return true;
 }
 
 propertyholder level::decode(tmxtag list)
@@ -312,7 +349,9 @@ int level::getheight()
 	return height;
 }
 
-plate level::getbg()
+plate level::getbg(){return bg;}
+
+plate level::getfg()
 {
-	return bg;
+	return fg;
 }
