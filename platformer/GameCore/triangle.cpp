@@ -83,6 +83,10 @@ triangle::triangle(int x1, int y1, int x2, int y2, int x3, int y3)
 	}
 }
 
+triangle::triangle()
+{
+}
+
 poly triangle::getdraw()
 {
 	poly end = poly(this->getX(), this->getY());

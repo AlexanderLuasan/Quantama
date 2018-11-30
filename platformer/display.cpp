@@ -82,7 +82,7 @@ bool display::adjCam(int x, int y)
 bool display::drawstart()
 {
 	al_set_target_backbuffer(screen);
-	al_clear_to_color(al_map_rgb(255, 255, 255));
+	al_clear_to_color(al_map_rgb(50, 50, 50));
 	return false;
 }
 
@@ -248,6 +248,15 @@ bool display::drawview(int x, int y, double angle, double size, int range)
 	x = x - camx + globaladjust;
 	y = y - camy + globaladjust;
 	al_draw_filled_triangle(x*scale,y*scale,x2*scale,y2*scale,x3*scale,y3*scale,al_map_rgba(125,0,125,125));
+
+	return true;
+}
+
+bool display::drawstealthbar(int percent)
+{
+	int bar = width * barsize / 100;
+	al_draw_filled_rectangle(scale*bar / 2, 2, scale * bar / 2 + scale * bar*percent/100,scale * height/10,al_map_rgb(0,125,0));
+	al_draw_rectangle(scale * bar/2,2,scale * width-scale * bar/2,scale * height/10,al_map_rgb(0,0,0),4);
 
 	return true;
 }

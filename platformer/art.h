@@ -5,6 +5,7 @@ class art
 {
 public:
 	art();
+	void delart();
 	art(ALLEGRO_BITMAP*img,int x,int y,int w,int h);
 	ALLEGRO_BITMAP * getimg();
 	rectangle getbox();

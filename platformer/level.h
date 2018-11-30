@@ -13,6 +13,7 @@ class level
 {
 public:
 	level();
+	~level();
 	level(string levelname);
 
 	//setupdiv
@@ -22,6 +23,7 @@ public:
 	void handleplates(tmxtag currentlayer);
 	bool addfg(int tile,int x, int y);
 	bool addbg(int tile, int x, int y);
+	bool addct(int tile, int x, int y);
 
 
 	void handlezones(tmxtag currentlayer);
@@ -38,9 +40,16 @@ public:
 
 	//extracting
 	vector<zone> blocks;
+	vector<zone> cover;
+
 	vector<art> imgs;
+	vector<art> center;
+	vector<art> front;
+
 	vector<cammera> cams;
+	
 	plate getbg();
+	plate getct();
 	plate getfg();
 private:
 	
@@ -53,6 +62,7 @@ private:
 	vector<sheet> tilesheets;
 	vector<sheetlist> imagesheets;
 	plate fg;
+	plate ct;
 	plate bg;
 
 	

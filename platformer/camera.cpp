@@ -1,6 +1,6 @@
 #include "camera.h"
 
-cammera::cammera(int x, int y, int range, double cone, double center, double size, double speed)
+cammera::cammera(int x, int y, int range, double cone, double center, double size, double speed, bool back)
 {
 	this->x = x;
 	this->y = y;
@@ -11,6 +11,7 @@ cammera::cammera(int x, int y, int range, double cone, double center, double siz
 	this->speed = speed;
 	currentangle = anglecenter;
 	direction = 1;
+	backrow = back;
 }
 
 void cammera::move()
@@ -57,4 +58,9 @@ hitbox cammera::getcolision()
 	x2 = x + cos(currentangle)*range;
 	y2 = y + sin(currentangle)*range;
 	return hitbox(x,y,x2,y2,0);
+}
+
+bool cammera::background()
+{
+	return backrow;
 }

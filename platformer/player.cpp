@@ -102,6 +102,14 @@ void player::positionupdate()
 			}
 		}
 		else if (duck) {
+			if (abs(vel[0]) > 50) {
+				if (vel[0] > 1) {
+					vel[0] = 50;
+				}
+				else {
+					vel[0] = -50;
+				}
+			}
 			if (aim[0] > 0 && vel[0] < 50) {
 				if (vel[0] == 0) {
 					vel[0] = 25;
@@ -458,4 +466,15 @@ poly player::getdraw()
 bool player::getflip()
 {
 	return fliped;
+}
+
+bool player::isback()
+{
+	return shadow;
+}
+
+bool player::switchshadow()
+{
+	shadow = !shadow;
+	return true;
 }

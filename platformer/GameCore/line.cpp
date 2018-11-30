@@ -39,28 +39,48 @@
 		int value;
 		if (this->right()>other->left()) {
 			pos = other->left()-this->left();
-			value = pos * slopey / slopex;
+			if (slopex != 0) {
+				value = pos * slopey / slopex;
+			}
+			else {
+				value = 1000;
+			}
 			if (this->getY() + value > other->top() && this->getY() + value < other->bottom()) {
 				return true;
 			}
 		}
 		if (this->left() < other->right()) {
 			pos = this->left()-other->right();
-			value = pos * slopey / slopex;
+			if (slopex != 0) {
+				value = pos * slopey / slopex;
+			}
+			else {
+				value = 1000;
+			}
 			if (this->getY() + value > other->top() && this->getY() + value < other->bottom()) {
 				return true;
 			}
 		}
 		if (this->bottom()>other->top()) {
 			pos = other->top() - this->top();
-			value = pos * slopex / slopey;
+			if (slopey != 0) {
+				value = pos * slopex / slopey;
+			}
+			else {
+				value = 1000;
+			}
 			if (this->getX() + value > other->left() && this->getX() + value < other->right()) {
 				return true;
 			}
 		}
 		if (this->top() < other->bottom()) {
 			pos = this->top() - other->bottom();
-			value = pos * slopex/ slopey;
+			if (slopey != 0) {
+				value = pos * slopex / slopey;
+			}
+			else {
+				value = 1000;
+			}
 			if (this->getX() + value > other->left() && this->getX() + value < other->right()) {
 				return true;
 			}

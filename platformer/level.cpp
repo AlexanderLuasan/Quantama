@@ -10,11 +10,31 @@ level::level()
 {
 }
 
+level::~level()
+{
+	for (int i = 0; i < blocks.size(); i++) {
+		blocks[i].gethit().preend();
+	}
+	for (int i = 0; i < cover.size(); i++) {
+		cover[i].gethit().preend();
+	}
+	
+	for (int i = 0; i < imgs.size(); i++) {
+		imgs[i].delart();
+	}
+	for (int i = 0; i < center.size(); i++) {
+		center[i].delart();
+	}
+	for (int i = 0; i < center.size(); i++) {
+		center[i].delart();
+	}
+}
+
 level::level(string levelname)
 {
 
 	imagesheets.push_back(sheetlist(string(path) + "firstunsizedtiles.tmx"));
-
+	imagesheets.push_back(sheetlist(string(path) + "cavetiles.tmx"));
 	tmxtag file = tmxtag(string(path) + levelname,0);
 
 	
@@ -85,6 +105,7 @@ void level::handleplates(tmxtag currentlayer)
 	int x = -1;
 	int y = 0;
 	bool backgound = currentlayer.head("name").find("bg") != string::npos;
+	bool center = currentlayer.head("name").find("ct") != string::npos;
 	if (true) {
 		for (int end = 0; end < initdata.size(); end++) {
 			if (initdata[end] == ',' || initdata[end] == '\n') {
@@ -92,6 +113,9 @@ void level::handleplates(tmxtag currentlayer)
 				int tile = stoi(initdata.substr(0, end));
 				if (backgound) {
 					this->addbg(tile, x, y);
+				}
+				else if (center) {
+					this->addct(tile, x, y);
 				}
 				else {
 					this->addfg(tile, x, y);
@@ -131,6 +155,9 @@ void level::handleplates(tmxtag currentlayer)
 				if (backgound) {
 					this->addbg(tile, x, y);
 				}
+				else if (center) {
+					this->addct(tile, x, y);
+				}
 				else {
 					this->addfg(tile, x, y);
 				}
@@ -154,6 +181,24 @@ bool level::addbg(int tile, int x, int y)
 			currentsheet += 1;
 		}
 		bg.addtile(tilesheets[0].getar(tile), x * 16, y * 16, 16, 16);
+	}
+	return false;
+}
+
+bool level::addct(int tile, int x, int y)
+{
+	if (tile > 0) {
+		tile -= 1;
+		int currentsheet = 0;
+		while (currentsheet < tilesheets.size()) {
+			if (tile < tilesheets[currentsheet].getcount()) {
+				ct.addtile(tilesheets[currentsheet].getar(tile), x*tilewidth, y*tileheight, tilesheets[currentsheet].getw(), tilesheets[currentsheet].geth());
+				return true;
+			}
+			tile -= tilesheets[currentsheet].getcount();
+			currentsheet += 1;
+		}
+		ct.addtile(tilesheets[0].getar(tile), x * 16, y * 16, 16, 16);
 	}
 	return false;
 }
@@ -247,7 +292,22 @@ bool level::maketriangle(tmxtag obj)
 			prop = decode(obj.get(i));
 		}
 	}
-	blocks.push_back(zone(tri,prop));
+
+
+
+
+
+	if (prop.isin("collision")) {
+		if (prop.get("collision").compare("false") == 0) {
+
+		}
+		else {
+			blocks.push_back(zone(tri, prop));
+		}
+	}
+	else {
+		blocks.push_back(zone(tri, prop));
+	}
 
 
 	return false;
@@ -267,7 +327,20 @@ bool level::makecircle(tmxtag obj)
 			prop = decode(obj.get(i));
 		}
 	}
-	blocks.push_back(zone(cir, prop));
+
+
+	if (prop.isin("collision")) {
+		if (prop.get("collision").compare("false") == 0) {
+
+		}
+		else {
+			blocks.push_back(zone(cir, prop));
+		}
+	}
+	else {
+		blocks.push_back(zone(cir, prop));
+	}
+	
 	return false;
 }
 
@@ -286,13 +359,44 @@ bool level::rectangle(tmxtag obj)
 			prop = decode(obj.get(i));
 		}
 	}
+	zone end = zone(rec, prop);
+
+	if (prop.isin("cover")) {
+		if (prop.get("cover").compare("true") == 0) {
+			cover.push_back(end);
+		}
+	}
+
 	if (prop.isin("image")) {
 		image = art(this->artsearch(prop.get("image")),x,y,w,h);
-		imgs.push_back(image);
+		if (prop.isin("layer")) {
+			if (prop.get("layer").compare("front") == 0) {
+				front.push_back(image);
+			}
+			else if (prop.get("layer").compare("center") == 0) {
+				center.push_back(image);
+			}
+			else {
+				imgs.push_back(image);
+			}
+		}
+		else {
+			imgs.push_back(image);
+		}
 	}
-	zone end = zone(rec, prop);
 	
-	blocks.push_back(end);
+	
+	if (prop.isin("collision")) {
+		if (prop.get("collision").compare("false") == 0) {
+
+		}
+		else {
+			blocks.push_back(end);
+		}
+	}
+	else {
+		blocks.push_back(end);
+	}
 	return false;
 }
 
@@ -324,7 +428,8 @@ bool level::makecammera(tmxtag obj)
 	double center = stod(prop.get("center"));
 	double size = stod(prop.get("size"));
 	double speed = stod(prop.get("speed"));
-	cammera actor = cammera(x,y,range,cone,center,size,speed);
+	bool back = prop.get("back").compare("true") == 0;
+	cammera actor = cammera(x,y,range,cone,center,size,speed,back);
 	cams.push_back(actor);
 	return true;
 }
@@ -350,6 +455,11 @@ int level::getheight()
 }
 
 plate level::getbg(){return bg;}
+
+plate level::getct()
+{
+	return ct;
+}
 
 plate level::getfg()
 {

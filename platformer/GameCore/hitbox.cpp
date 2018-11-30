@@ -3,6 +3,17 @@
 
 hitbox::hitbox()
 {
+	self = nullptr;
+}
+
+
+void hitbox::preend()
+{
+	if (self != nullptr) {
+		delete self;
+		self = nullptr;
+	}
+
 }
 
 hitbox::hitbox(int x, int y, int width, int height)
@@ -62,10 +73,10 @@ bool hitbox::collision(hitbox other)
 bool hitbox::iswithin(hitbox other)
 {
 	if (self->simplecolide(other.self)) {
-		if (other.bottom()<self->bottomR(other.self)) {
-			if (other.top() > self->topR(other.self)) {
-				if (other.left() > self->leftR(other.self)) {
-					if (other.right() < self->rightR(other.self)) {
+		if (other.bottom()<=self->bottomR(other.self)) {
+			if (other.top() >= self->topR(other.self)) {
+				if (other.left() >= self->leftR(other.self)) {
+					if (other.right() <= self->rightR(other.self)) {
 						return true;
 					}
 				}

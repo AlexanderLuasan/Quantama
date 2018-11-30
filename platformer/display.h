@@ -6,6 +6,8 @@
 #define globaladjust 10
 #define globalscale 1
 #define maxcamspeed 10
+#define barsize 50
+
 class display
 {
 public:
@@ -21,6 +23,7 @@ public:
 	bool draw(poly shape);
 	bool draw(int x, int y, int w, int h);
 	bool drawview(int x, int y, double angle, double size, int range);
+	bool drawstealthbar(int percent);
 private:
 	int scale;
 	int camx;

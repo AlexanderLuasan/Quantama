@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextobjectid="17">
- <tileset firstgid="1" name="min" tilewidth="32" tileheight="32" tilecount="320" columns="20">
-  <image source="min.png" width="640" height="512"/>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="32" tileheight="32" infinite="0" nextobjectid="21">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="160" columns="16">
+  <image source="tiles.png" width="512" height="320"/>
  </tileset>
- <tileset firstgid="321" name="tiles" tilewidth="32" tileheight="32" tilecount="72" columns="12">
-  <image source="tiles.png" width="384" height="192"/>
+ <tileset firstgid="161" name="cave" tilewidth="32" tileheight="32" tilecount="320" columns="20">
+  <image source="cave.png" width="640" height="512"/>
  </tileset>
- <tileset firstgid="393" name="mini" tilewidth="32" tileheight="32" tilecount="64" columns="8">
-  <image source="mini.png" width="256" height="256"/>
+ <tileset firstgid="481" name="myth" tilewidth="32" tileheight="32" tilecount="672" columns="48">
+  <image source="myth.png" width="1536" height="448"/>
  </tileset>
- <tileset firstgid="457" name="ts_32_expansion" tilewidth="32" tileheight="32" tilecount="36" columns="9">
-  <image source="ts_32_expansion.png" width="304" height="128"/>
-  <terraintypes>
-   <terrain name="bridge" tile="4"/>
-  </terraintypes>
-  <tile id="3" terrain=",,,0"/>
-  <tile id="8" terrain=",,0,"/>
-  <tile id="12" terrain=",0,,"/>
-  <tile id="17" terrain="0,,,"/>
+ <tileset firstgid="1153" name="tiles" tilewidth="32" tileheight="32" tilecount="160" columns="16">
+  <image source="tiles.png" width="512" height="320"/>
  </tileset>
  <layer name="fg" width="40" height="20">
   <data encoding="csv">
@@ -36,11 +29,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,327,328,329,328,330,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,351,352,340,340,340,340,340,353,354,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,363,387,387,387,387,387,387,387,365,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,0,102,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,49,0,17,18,50,50,0,0,0,0,0,4,0,4,0,0,0,106,0,0,118,0,0,
+36,36,52,52,52,53,36,37,36,52,52,37,36,37,52,52,36,37,52,53,36,52,53,36,52,53,37,52,52,53,52,52,37,52,53,52,52,53,36,37
 </data>
  </layer>
  <layer name="bg" width="40" height="20">
@@ -58,13 +51,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,369,370,334,334,371,372,0,369,370,371,372,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-7,8,9,10,11,8,9,10,11,8,9,10,11,8,9,10,11,8,9,10,11,8,9,10,11,8,9,10,11,8,9,10,11,8,9,10,11,8,11,12
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,25,25,24,25,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,36,37,36,36,37,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,2,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,3,0,3,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,54,49,50,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,3,0,3,0,102,0,0,103,0,0,0,
+0,0,0,0,0,69,70,65,66,67,68,0,0,69,68,0,0,49,17,18,17,18,50,0,0,0,0,4,0,4,0,4,0,118,0,122,119,0,0,0,
+36,37,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,36,37
 </data>
  </layer>
  <objectgroup name="zones">
@@ -88,18 +81,39 @@
   <object id="11" x="239" y="576" width="31" height="33"/>
   <object id="13" x="352" y="544" width="35" height="39">
    <properties>
+    <property name="collision" value="false"/>
+    <property name="cover" value="true"/>
     <property name="image" value="shovel"/>
+    <property name="layer" value="center"/>
+   </properties>
+  </object>
+  <object id="17" x="863" y="449" width="160" height="30"/>
+  <object id="18" x="736" y="544" width="64" height="64">
+   <properties>
+    <property name="collision" value="false"/>
+    <property name="cover" value="true"/>
+    <property name="image" value="grave3"/>
+    <property name="layer" value="center"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="actors">
   <object id="15" name="cammera" x="128" y="448">
    <properties>
-    <property name="center" value="1.5"/>
+    <property name="center" value="1.57079632679"/>
     <property name="cone" value=".1"/>
     <property name="range" value="170"/>
-    <property name="size" value=".5"/>
-    <property name="speed" value=".0"/>
+    <property name="size" value="2"/>
+    <property name="speed" value="0.01"/>
+   </properties>
+  </object>
+  <object id="20" name="cammera" x="608" y="480">
+   <properties>
+    <property name="center" value="1.57079632679"/>
+    <property name="cone" value=".1"/>
+    <property name="range" value="170"/>
+    <property name="size" value="10"/>
+    <property name="speed" value="0.01"/>
    </properties>
   </object>
  </objectgroup>

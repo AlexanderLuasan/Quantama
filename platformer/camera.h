@@ -5,7 +5,7 @@
 class cammera
 {
 public:
-	cammera(int x, int y, int range, double cone, double center, double size,double speed);
+	cammera(int x, int y, int range, double cone, double center, double size,double speed, bool back);
 	void move();
 	double getangle();
 	double getanglesize();
@@ -13,8 +13,10 @@ public:
 	int getx();
 	int gety();
 	hitbox getcolision();
+	bool background();
 private:
 	int x, y;
+	bool backrow;
 	int range;
 	double angleconesize;
 	double anglecenter;

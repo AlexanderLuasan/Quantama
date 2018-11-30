@@ -38,6 +38,8 @@ public:
 	poly getdrawingbox();
 	poly getdraw();
 	bool getflip();
+	bool isback();
+	bool switchshadow();
 private:
 
 	int animationcounter;
@@ -49,6 +51,7 @@ private:
 	string animationstate;
 	bool fliped = false;
 
+	bool shadow = false;
 
 	bool inair;
 	bool duck;
